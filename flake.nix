@@ -13,7 +13,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           configuration = import ./demo { inherit pkgs; };
         in
-        pkgs.callPackage ./xenon/package.nix { inherit pkgs configuration; };
+        pkgs.callPackage ./module/package.nix { inherit pkgs configuration; };
     in
     {
       apps = forAllSystems (system: {
@@ -27,8 +27,8 @@
         demo = demoPackage system;
       });
 
-      nixosModules = import ./xenon/nixos.nix;
-      homeManagerModules = import ./xenon/home-manager.nix;
+      nixosModules = import ./module/nixos.nix;
+      homeManagerModules = import ./module/home-manager.nix;
 
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
     };

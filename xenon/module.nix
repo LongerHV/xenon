@@ -48,10 +48,16 @@ let
       ]);
     }
   );
-  finalPackage = pkgs.runCommand "xenon" { } ''
-    mkdir -p $out/bin
-    ln -s ${wrappedPackage}/bin/nvim $out/bin/${cfg.executable}
+  mkAlias = alias: ''
+    ln -s ${wrappedPackage}/bin/nvim $out/bin/${alias}
   '';
+  finalPackage = pkgs.runCommand "xenon" { } (
+    ''
+      mkdir -p $out/bin
+    ''
+    + (mkAlias cfg.executable)
+    + (lib.concatMapStrings mkAlias cfg.aliases)
+  );
 in
 {
   imports = [ ./options.nix ];

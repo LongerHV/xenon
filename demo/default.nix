@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  aliases = [ "nvim" "vim" "vi" ];
   initFile = ./init.lua;
   plugins = [
     { plugin = pkgs.vimPlugins.nvim-treesitter.withAllGrammars; }

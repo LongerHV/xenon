@@ -49,6 +49,10 @@ in
       type = types.str;
       default = "xenon";
     };
+    aliases = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+    };
     extraPackages = mkOption {
       type = with types; listOf package;
       default = [ ];

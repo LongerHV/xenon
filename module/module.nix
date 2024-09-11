@@ -29,8 +29,7 @@ let
       pluginConfig
       "-- end\n"
     ]));
-  wrapNeovim = pkgs.callPackage ./wrapper.nix { };
-  wrappedPackage = wrapNeovim cfg.package (
+  wrappedPackage = pkgs.wrapNeovimUnstable cfg.package (
     neovimConfig
     //
     {

@@ -1,42 +1,5 @@
 { pkgs, lib, ... }:
 
-let
-  pluginOptions = _: with lib; {
-    options = {
-      plugin = mkOption {
-        type = types.package;
-      };
-      main = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
-      opts = mkOption {
-        type = types.attrs;
-        default = { };
-      };
-      configFile = mkOption {
-        type = types.nullOr types.path;
-        default = null;
-      };
-      preConfig = mkOption {
-        type = types.lines;
-        default = "";
-      };
-      postConfig = mkOption {
-        type = types.lines;
-        default = "";
-      };
-      dependencies = mkOption {
-        type = types.listOf types.package;
-        default = [ ];
-      };
-      extraPackages = mkOption {
-        type = types.listOf types.package;
-        default = [ ];
-      };
-    };
-  };
-in
 {
   options.programs.xenon = with lib; {
     enable = mkEnableOption "xenon";
@@ -78,7 +41,41 @@ in
       default = "";
     };
     plugins = mkOption {
-      type = types.listOf (types.submodule pluginOptions);
+      type = types.listOf (types.submodule {
+        options = {
+          plugin = mkOption {
+            type = types.package;
+          };
+          main = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+          };
+          opts = mkOption {
+            type = types.attrs;
+            default = { };
+          };
+          configFile = mkOption {
+            type = types.nullOr types.path;
+            default = null;
+          };
+          preConfig = mkOption {
+            type = types.lines;
+            default = "";
+          };
+          postConfig = mkOption {
+            type = types.lines;
+            default = "";
+          };
+          dependencies = mkOption {
+            type = types.listOf types.package;
+            default = [ ];
+          };
+          extraPackages = mkOption {
+            type = types.listOf types.package;
+            default = [ ];
+          };
+        };
+      });
       default = [ ];
     };
   };

@@ -4,7 +4,7 @@
   aliases = [ "nvim" "vim" "vi" ];
   initFile = ./init.lua;
   plugins = [
-    { plugin = pkgs.vimPlugins.nvim-treesitter.withAllGrammars; }
+    { plugin = pkgs.vimPlugins.nvim-treesitter.withAllGrammars; opts = {}; }
     {
       plugin = pkgs.vimPlugins.telescope-nvim;
       main = "telescope";

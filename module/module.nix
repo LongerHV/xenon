@@ -11,7 +11,7 @@ let
   renderPluginConfig = p:
     let
       main = if p.main != null then p.main else p.plugin.pname;
-      setupCommand = lib.optionalString (p.opts != { }) /* lua */ ''
+      setupCommand = lib.optionalString (p.opts != null) /* lua */ ''
         require("${main}").setup(vim.fn.json_decode([[${builtins.toJSON p.opts}]]))
       '';
       doConfigFileCommand = lib.optionalString (p.configFile != null) /* lua */ ''

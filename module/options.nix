@@ -51,8 +51,8 @@
             default = null;
           };
           opts = mkOption {
-            type = types.attrs;
-            default = { };
+            type = types.nullOr types.attrs;
+            default = null;
           };
           configFile = mkOption {
             type = types.nullOr types.path;
